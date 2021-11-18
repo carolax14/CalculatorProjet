@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace CalculatorProjet
@@ -20,10 +21,12 @@ namespace CalculatorProjet
         string operand = "";
         double result = 0;
 
+        
+
         public Form1()
         {
             InitializeComponent();
-            
+            this.KeyPreview = true;
         }
 
         /*DEBUT Configuration Fenêtre*/
@@ -69,6 +72,72 @@ namespace CalculatorProjet
         /*FIN Configuration Fenêtre*/
 
 
+        /*DEBUT Configuration touche clavier*/
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar.ToString())
+            {
+                case "0":
+                    btn0.PerformClick();
+                    break;
+                case "1":
+                    btn1.PerformClick();
+                    break;
+                case "2":
+                    btn2.PerformClick();
+                    break;
+                case "3":
+                    btn3.PerformClick();
+                    break;
+                case "4":
+                    btn4.PerformClick();
+                    break;
+                case "5":
+                    btn5.PerformClick();
+                    break;
+                case "6":
+                    btn6.PerformClick();
+                    break;
+                case "7":
+                    btn7.PerformClick();
+                    break;
+                case "8":
+                    btn8.PerformClick();
+                    break;
+                case "9":
+                    btn9.PerformClick();
+                    break;
+                case "+":
+                    btnPlus.PerformClick();
+                    break;
+                case "-":
+                    btnMoins.PerformClick();
+                    break;
+                case "*":
+                    btnMulti.PerformClick();
+                    break;
+                case "/":
+                    btnDiv.PerformClick();
+                    break;
+                case "=":
+                    btnEgal.PerformClick();
+                    break;
+
+                default:
+                    break;
+
+            }
+
+            if (e.KeyChar == (char)Keys.Enter)
+                btnEgal.PerformClick();
+            if (e.KeyChar == (char)Keys.Back)
+                btnReturn.PerformClick();
+        }
+
+        /*FIN Configuration touche clavier*/
+
+
+
         // "NumEvent" permet d'affichier lors d'un click d'un sur un bouton sa valeur  
         private void NumEvent(object sender, EventArgs e)  
         {
@@ -81,6 +150,8 @@ namespace CalculatorProjet
             Button btn = (Button)sender;
             tbResult.Text += btn.Text;
             operandPerformed = false;
+            
+
 
         }
 
@@ -130,6 +201,7 @@ namespace CalculatorProjet
         {
             Button btn = (Button)sender;
             string newOperand = btn.Text;
+            
 
             //Vide le label des détails de l'opération
             /*lbResult.Text = "";*/
@@ -204,6 +276,9 @@ namespace CalculatorProjet
             }
         }
 
-        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
