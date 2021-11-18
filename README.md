@@ -2,7 +2,7 @@
 
 
 
-## Principaux Fonctionnalités
+## Principales Fonctionnalités
 
 | Boutons     | Fonctionalité               | Code                    |
 | ----------- | --------------------------- | ----------------------- |
