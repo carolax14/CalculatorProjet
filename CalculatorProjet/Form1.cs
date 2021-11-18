@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,9 @@ namespace CalculatorProjet
 {
     public partial class Form1 : Form
     {
+        bool drag = false;
+        Point start_point = new Point(0, 0);
+
         bool operandPerformed = false;
         string operand = "";
         double result = 0;
@@ -19,6 +23,29 @@ namespace CalculatorProjet
         public Form1()
         {
             InitializeComponent();
+            
+        }
+
+        /*DEBUT Configuration Fenêtre*/
+
+        private void panel_header_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+            start_point = new Point(e.X, e.Y);
+        }
+
+        private void panel_header_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (drag)
+            {
+                Point p = PointToScreen(e.Location);
+                this.Location = new Point(p.X - start_point.X, p.Y - start_point.Y);
+            }
+        }
+
+        private void panel_header_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -38,6 +65,9 @@ namespace CalculatorProjet
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        /*FIN Configuration Fenêtre*/
+
 
         // "NumEvent" permet d'affichier lors d'un click d'un sur un bouton sa valeur  
         private void NumEvent(object sender, EventArgs e)  
@@ -173,5 +203,7 @@ namespace CalculatorProjet
                 tbResult.Text = "-" + tbResult.Text;
             }
         }
+
+        
     }
 }

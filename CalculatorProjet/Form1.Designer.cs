@@ -55,7 +55,9 @@ namespace CalculatorProjet
             this.lbTitle = new System.Windows.Forms.Label();
             this.lbResult = new System.Windows.Forms.Label();
             this.tbResult = new System.Windows.Forms.TextBox();
+            this.panelHeader = new System.Windows.Forms.Panel();
             this.panelKeys.SuspendLayout();
+            this.panelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelKeys
@@ -380,7 +382,7 @@ namespace CalculatorProjet
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(292, 1);
+            this.btnClose.Location = new System.Drawing.Point(292, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(39, 36);
             this.btnClose.TabIndex = 2;
@@ -396,7 +398,7 @@ namespace CalculatorProjet
             this.btnExtend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExtend.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExtend.ForeColor = System.Drawing.Color.White;
-            this.btnExtend.Location = new System.Drawing.Point(253, 1);
+            this.btnExtend.Location = new System.Drawing.Point(253, 0);
             this.btnExtend.Name = "btnExtend";
             this.btnExtend.Size = new System.Drawing.Size(39, 36);
             this.btnExtend.TabIndex = 3;
@@ -412,7 +414,7 @@ namespace CalculatorProjet
             this.btnReduce.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReduce.Font = new System.Drawing.Font("Century Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReduce.ForeColor = System.Drawing.Color.White;
-            this.btnReduce.Location = new System.Drawing.Point(217, 1);
+            this.btnReduce.Location = new System.Drawing.Point(217, 0);
             this.btnReduce.Name = "btnReduce";
             this.btnReduce.Size = new System.Drawing.Size(39, 36);
             this.btnReduce.TabIndex = 4;
@@ -426,7 +428,7 @@ namespace CalculatorProjet
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.ForeColor = System.Drawing.Color.White;
-            this.lbTitle.Location = new System.Drawing.Point(12, 12);
+            this.lbTitle.Location = new System.Drawing.Point(12, 10);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(87, 17);
             this.lbTitle.TabIndex = 5;
@@ -457,23 +459,36 @@ namespace CalculatorProjet
             this.tbResult.Text = "0";
             this.tbResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // panelHeader
+            // 
+            this.panelHeader.Controls.Add(this.lbTitle);
+            this.panelHeader.Controls.Add(this.btnClose);
+            this.panelHeader.Controls.Add(this.btnExtend);
+            this.panelHeader.Controls.Add(this.btnReduce);
+            this.panelHeader.Location = new System.Drawing.Point(2, 3);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(332, 38);
+            this.panelHeader.TabIndex = 9;
+            this.panelHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_header_MouseDown);
+            this.panelHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_header_MouseMove);
+            this.panelHeader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_header_MouseUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(333, 494);
+            this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.tbResult);
             this.Controls.Add(this.lbResult);
-            this.Controls.Add(this.lbTitle);
-            this.Controls.Add(this.btnReduce);
-            this.Controls.Add(this.btnExtend);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.panelKeys);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Calculatrice";
             this.panelKeys.ResumeLayout(false);
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,6 +522,7 @@ namespace CalculatorProjet
         private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.Label lbResult;
         private System.Windows.Forms.TextBox tbResult;
+        private System.Windows.Forms.Panel panelHeader;
     }
 }
 
