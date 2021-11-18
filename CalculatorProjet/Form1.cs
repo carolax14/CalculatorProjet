@@ -39,20 +39,27 @@ namespace CalculatorProjet
             this.WindowState = FormWindowState.Minimized;
         }
 
-
-        private void NumEvent(object sender, EventArgs e)
+        // "NumEvent" permet d'affichier lors d'un click d'un sur un bouton sa valeur  
+        private void NumEvent(object sender, EventArgs e)  
         {
             if (tbResult.Text == "0" || operandPerformed)
                 tbResult.Clear();
 
+            // Lors du click sur le bouton
+            // La valeur inscrit sur le bouton s'affichera dans la textBox 
+            // Pas d'opération effectuée
             Button btn = (Button)sender;
             tbResult.Text += btn.Text;
             operandPerformed = false;
 
         }
 
+       // "operandEvent" permet d'affichier lors d'un click sur un bouton sa valeur
         private void OperandEvent(object sender, EventArgs e)
-        {
+        {   
+            // Opération effectuée
+            // Lors du click sur le bouton
+            // La variable "newOperand" est égal à la valeur du bouton selectionné
             operandPerformed = true;
             Button btn = (Button)sender;
             string newOperand = btn.Text;
@@ -70,6 +77,7 @@ namespace CalculatorProjet
             }
 
             //Affiche dans la texbox : Le résultat de l'opération
+            // 
             result = Double.Parse(tbResult.Text);
             operand = newOperand;
         }
@@ -83,8 +91,8 @@ namespace CalculatorProjet
         private void btnClean_Click(object sender, EventArgs e)
         {
             tbResult.Text = "0"; // Vide la texbox 
-            lbResult.Text = ""; // Vide le label 
-            result = 0; // Remet le conteur à 0
+            lbResult.Text = "";  // Vide le label 
+            result = 0;          // Remet le conteur à 0
             operand = ""; 
         }
 
@@ -95,7 +103,7 @@ namespace CalculatorProjet
 
             //Vide le label des détails de l'opération
             /*lbResult.Text = "";*/
-            // Affiche dans le label : le détails de l'opération
+
             lbResult.Text = lbResult.Text + " " + tbResult.Text + " " + newOperand;
             operandPerformed = true;
 
@@ -109,7 +117,7 @@ namespace CalculatorProjet
             }
 
             result = Double.Parse(tbResult.Text);
-            tbResult.Text = result.ToString(); // Affiche dans la texbox le résultat de la variable "result"
+            tbResult.Text = result.ToString(); // Retourne sous chaine de caractère le contenu de "result"
             result = 0; // Remet le conteur à 0
             operand = "";
         }
@@ -139,8 +147,7 @@ namespace CalculatorProjet
             {
                 if (tbResult.Text.Length > 0)
                 {
-                tbResult.Text = tbResult.Text.Remove(tbResult.Text.Length - 1, 1);
-
+                    tbResult.Text = tbResult.Text.Remove(tbResult.Text.Length - 1, 1);
                 }
             }
             if (lbResult.Text.Length > 0)
@@ -151,8 +158,10 @@ namespace CalculatorProjet
             {
                 lbResult.Text = "";
             }
+
         }
 
+        // Ajoute le signe "-" devant un chiffre
         private void btnSMoins_Click(object sender, EventArgs e)
         {
             if (tbResult.Text.Contains("-"))
