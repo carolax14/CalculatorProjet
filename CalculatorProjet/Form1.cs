@@ -12,14 +12,13 @@ namespace CalculatorProjet
 {
     public partial class Form1 : Form
     {
+        bool operandPerformed = false;
+        string operand = "";
+        double result = 0;
+
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void panelKeys_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -40,9 +39,130 @@ namespace CalculatorProjet
             this.WindowState = FormWindowState.Minimized;
         }
 
+
         private void NumEvent(object sender, EventArgs e)
         {
+            if (tbResult.Text == "0" || operandPerformed)
+                tbResult.Clear();
 
+            Button btn = (Button)sender;
+            tbResult.Text += btn.Text;
+            operandPerformed = false;
+
+        }
+
+        private void OperandEvent(object sender, EventArgs e)
+        {
+            operandPerformed = true;
+            Button btn = (Button)sender;
+            string newOperand = btn.Text;
+
+            // Affiche dans le label : le détails de l'opération
+            lbResult.Text = lbResult.Text + " " + tbResult.Text + " " + newOperand; 
+
+            switch (operand)
+            {
+                case "+": tbResult.Text = (result + Double.Parse(tbResult.Text)).ToString(); break;
+                case "-": tbResult.Text = (result - Double.Parse(tbResult.Text)).ToString(); break;
+                case "x": tbResult.Text = (result * Double.Parse(tbResult.Text)).ToString(); break;
+                case "÷": tbResult.Text = (result / Double.Parse(tbResult.Text)).ToString(); break;
+                default: break;
+            }
+
+            //Affiche dans la texbox : Le résultat de l'opération
+            result = Double.Parse(tbResult.Text);
+            operand = newOperand;
+        }
+
+        private void panelKeys_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            tbResult.Text = "0"; // Vide la texbox 
+            lbResult.Text = ""; // Vide le label 
+            result = 0; // Remet le conteur à 0
+            operand = ""; 
+        }
+
+        private void btnEgal_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string newOperand = btn.Text;
+
+            //Vide le label des détails de l'opération
+            /*lbResult.Text = "";*/
+            // Affiche dans le label : le détails de l'opération
+            lbResult.Text = lbResult.Text + " " + tbResult.Text + " " + newOperand;
+            operandPerformed = true;
+
+            switch (operand)
+            {
+                case "+": tbResult.Text = (result + Double.Parse(tbResult.Text)).ToString(); break;
+                case "-": tbResult.Text = (result - Double.Parse(tbResult.Text)).ToString(); break;
+                case "x": tbResult.Text = (result * Double.Parse(tbResult.Text)).ToString(); break;
+                case "÷": tbResult.Text = (result / Double.Parse(tbResult.Text)).ToString(); break;
+                default: break;
+            }
+
+            result = Double.Parse(tbResult.Text);
+            tbResult.Text = result.ToString(); // Affiche dans la texbox le résultat de la variable "result"
+            result = 0; // Remet le conteur à 0
+            operand = "";
+        }
+
+        private void btnVirgule_Click(object sender, EventArgs e)
+        {
+            if (!operandPerformed && !tbResult.Text.Contains(","))
+            {
+                tbResult.Text += ",";
+            }
+            else if (operandPerformed)
+            {
+                tbResult.Text = "0";
+            }
+
+            if (!tbResult.Text.Contains(","))
+            {
+                tbResult.Text += ",";
+            }
+
+            operandPerformed = false;
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            if (lbResult.Text == "")
+            {
+                if (tbResult.Text.Length > 0)
+                {
+                tbResult.Text = tbResult.Text.Remove(tbResult.Text.Length - 1, 1);
+
+                }
+            }
+            if (lbResult.Text.Length > 0)
+            {
+                lbResult.Text = lbResult.Text.Remove(lbResult.Text.Length - 1, 1);
+            }
+            if (result == 0 && operand == "")
+            {
+                lbResult.Text = "";
+            }
+        }
+
+        private void btnSMoins_Click(object sender, EventArgs e)
+        {
+            if (tbResult.Text.Contains("-"))
+            {
+                tbResult.Text = tbResult.Text.Remove(0, 1);
+            }
+            else
+            {
+                tbResult.Text = "-" + tbResult.Text;
+            }
         }
     }
 }
